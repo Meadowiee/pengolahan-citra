@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="starter-template">
+    <h1>Edge Detection</h1>
+    <p class="lead mb-5">
+        Metode Edge Detection-Based Segmentation adalah salah satu teknik dalam proses segmentasi citra yang bertujuan
+        utnuk menemukan tepi objek dalam gambar.
+        Teknik ini dilakukan dengan mencari perubahan intensitas piksel yang terjadi tiba-tiba pada citra.
+    </p>
+
+    <div class="rows-card">
+        <div class="card mb-5">
+            <form method="POST" enctype="multipart/form-data">
+                <div class="card-body p-4">
+                    <div class="row">
+                        <div class="col-xl-6 mb-3 text-start">
+                            <label for="formFile" class="form-label">Original Image <span
+                                    class="text-danger">*</span></label>
+                            <input class="form-control" type="file" id="formFile" name="image" required>
+                        </div>
+                        <div class="col-xl-6 mb-3 text-start">
+                            <label for="operator" class="form-label">Edge Detection Type <span class="text-danger">*</span></span></label>
+                            <select class="form-select" name="operator" id="operator">
+                                <option value="sobel">Sobel</option>
+                                <option value="prewitt">Prewitt</option>
+                                <option value="roberts">Roberts</option>
+                                <option value="canny">Canny</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="text-end d-grid d-md-block">
+                        <button type="submit" class="btn btn-md btn-primary" style="min-width: 6rem;">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% if original_image and result_image %}
+    <div class="rows-card">
+        <div class="card mb-5">
+            <div class="card-body p-4">
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <h5>Original Image</h5>
+                        <img src="{{ url_for('static', filename=original_image) }}" class="img-fluid rounded-3 border">
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <h5>{{ selected_operator|capitalize }} Detection Image</h5>
+                        <img src="{{ url_for('static', filename=result_image) }}" class="img-fluid rounded-3 border">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
