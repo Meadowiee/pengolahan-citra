@@ -92,3 +92,26 @@ def apply_threshold(img_path, threshold, output_path):
     img = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
     _, thresh_img = cv2.threshold(img, threshold, 255, cv2.THRESH_BINARY)
     cv2.imwrite(output_path, thresh_img)
+
+def apply_morphology(img_path, output_path, operation, structure_shape, structure_size):
+    img = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
+
+    if structure_shape == 'rect':
+        shape = cv2.MORPH_RECT
+    elif structure_shape == 'ellipse':
+        shape = cv2.MORPH_ELLIPSE
+    elif structure_shape == 'cross':
+        shape = cv2.MORPH_CROSS
+    else:
+        raise ValueError("Invalid kernel shape selected")
+
+    structure_element = cv2.getStructuringElement(shape, (structure_size, structure_size))
+
+    if operation == 'dilation':
+        result = cv2.erode(img, structure_element, iterations=1)
+    elif operation == 'erosion':
+        result = cv2.dilate(img, structure_element, iterations=1)
+    else:
+        raise ValueError("Invalid morphology operation")
+
+    cv2.imwrite(output_path, result)

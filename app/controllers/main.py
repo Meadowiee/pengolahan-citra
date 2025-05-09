@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, current_app
 import os
 from werkzeug.utils import secure_filename
-from app.models.processor import apply_selected_operator, apply_threshold
+from app.models.processor import apply_selected_operator, apply_threshold, apply_morphology
 
 main_bp = Blueprint('main', __name__)
 
@@ -56,3 +56,28 @@ def threshold():
                 threshold_image=f"results/{result_filename}")
     
     return render_template('threshold.html')
+
+@main_bp.route('/morphology', methods=['GET', 'POST'])
+def morphology():
+    if request.method == 'POST':
+        image = request.files.get('image')
+        operation = request.form.get('operation')
+        structure_shape = request.form.get('structure_shape') 
+        structure_size = int(request.form.get('structure_size'))
+
+        if image and allowed_file(image.filename):
+            filename = secure_filename(image.filename)
+            upload_folder = current_app.config['UPLOAD_FOLDER']
+            upload_path = os.path.join(upload_folder, filename)
+            image.save(upload_path)
+
+            result_filename = f"{operation}_{filename}"
+            result_path = os.path.join(current_app.config['RESULT_FOLDER'], result_filename)
+
+            apply_morphology(upload_path, result_path, operation, structure_shape, structure_size)
+
+            return render_template('morphology.html', operation=operation,
+                                   original_image=f"uploads/{filename}",
+                                   result_image=f"results/{result_filename}")
+
+    return render_template('morphology.html')

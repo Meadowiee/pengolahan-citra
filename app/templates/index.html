@@ -7,10 +7,10 @@
         Proses pengolahan citra untuk memudahkan mengenali pola atau mendeteksi objek tertentu
     </p>
 
-    <div class="d-flex justify-content-center gap-3">
+    <div class="d-flex justify-content-center">
         <div class="row pt-4">
-            <div class="col-sm-6 mb-3">
-                <div class="d-flex justify-content-center gap-3">
+            <div class="col-sm-4 mb-3">
+                <div class="d-flex justify-content-center">
                     <div class="card" style="width: 20rem;">
                         <div class="card-body p-4">
                             <h5 class="card-title mb-2">Thresholding</h5>
@@ -26,17 +26,30 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 mb-3">
+            <div class="col-sm-4 mb-3">
                 <div class="d-flex justify-content-center">
                     <div class="card" style="width: 20rem;">
                         <div class="card-body p-4">
                             <h5 class="card-title mb-2">Edge Detection</h5>
                             <p class="card-text fw-light text-muted truncate-multiline mb-1">
-                                Teknik yang dugunakan untuk mendeteksi batas atau tepi objek dalam gambar. Teknik ini
+                                Teknik yang digunakan untuk mendeteksi batas atau tepi objek dalam gambar. Teknik ini
                                 dilakukan dengan mencari perubahan intensitas piksel yang terjadi tiba-tiba pada citra.
                                 Dengan kata lain, edge detection adalah proses untuk menemukan batas objek dalam citra.
                             </p>
                             <a href="{{ url_for('main.edge') }}" class="small">Click to see more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 mb-3">
+                <div class="d-flex justify-content-center">
+                    <div class="card" style="width: 20rem;">
+                        <div class="card-body p-4">
+                            <h5 class="card-title mb-2">Morfologi Citra</h5>
+                            <p class="card-text fw-light text-muted truncate-multiline mb-1">
+                                Morfologi Citra adalah teknik pengolahan citra dengan menggunakan elemen struktur untuk melakukan manipulasi bentuk objek. Dua operasi dasar dalam morfologi ialah dilation dan erosion.
+                            </p>
+                            <a href="{{ url_for('main.morphology') }}" class="small">Click to see more</a>
                         </div>
                     </div>
                 </div>

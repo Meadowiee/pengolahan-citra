@@ -30,6 +30,9 @@
           <li class="nav-item">
             <a class="nav-link {% if request.endpoint == 'main.edge' %}active{% endif %}" href="{{ url_for('main.edge') }}">Edge Detection</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.endpoint == 'main.morphology' %}active{% endif %}" href="{{ url_for('main.morphology') }}">Morphology</a>
+          </li>
         </ul>
       </div>
     </div>
